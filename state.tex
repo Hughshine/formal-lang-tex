@@ -1,0 +1,27 @@
+\section{state}
+
+\begin{longtable}{rcl rcl rcl}
+    \hline			
+    $ (\!\textit{Value})\ w, r $ & $ \in $ & $\mathbb{O}_{\checkmark}$\\  
+    $ (\!\textit{LVMap})\ s $ & $ \in $ & $ Nat \rightharpoonup Term$\\
+    $ (\!\textit{RefMap})\ h $ & $ \in $ & $ Nat \rightharpoonup Term$\\
+    $ (\!\textit{BindState})\ \sigma $ & $ ::= $ & $ (s, h) $\\
+    
+    $  (\!\textit{Tag-Block})\ T_b $ & $ \in $ & $\{\texttt{ok}, \texttt{break}, \texttt{continue}\}$\\  
+    $ (\!\textit{BlockState})\ \gamma $ & $ ::= $ & $ (T_b, \iL, r)$\\
+    
+    $ (\!\textit{State})\ \mathcal{P} $ & $ ::= $ & $ (\sigma,\gamma, \delta) $\\
+    \hline
+    \caption{State Design}
+    \label{tb:formal-state}\\
+\end{longtable}
+
+\begin{longtable}{rcl rcl rcl}
+    \hline			
+    $ (\!\textit{VarAccess})\ \iv \mapsto_s t $ & $ ::= $ & $ s(\iv) = t$\\  
+    $ (\!\textit{ReferenceAccess})\ \ia \mapsto_h v $ & $ ::= $ & $ h(\ia) = v$\\ 
+    $ (\!\textit{MapUpdate})\ s\{k \rightsquigarrow v\} $ & $ ::= $ & $\lambda z.\left\{\def\arraystretch{1.2}\begin{tabular}{@{}l@{\quad}l@{}}$s(z),$ &\text{if}\;$z\not=k;$ \\$v$, & \text{if}\;$z=k.$\end{tabular}\right.$ \\
+    \hline
+    \caption{Notations}
+    \label{tb:notations}\\	
+\end{longtable}

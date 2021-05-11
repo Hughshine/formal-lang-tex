@@ -1,0 +1,46 @@
+\section{semantics}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{c}
+    	$
+        	\inferrule[Eval-Loc-Var] %  evaluation finishes
+        	{ \iv \mapsto_s t}
+        	{ (\iv, (s, h), -, -, -) \longrightarrow  (t, (s, h), -, -, -)}
+        $  \kspace \\   	
+
+    	$
+    	\inferrule[Bind-Var]
+    	{ }
+    	{(\texttt{bind}\;x = t\;\texttt{in}\;e, \sigma, (\vec{x}, \vec{t^x}, \vec{a}, \vec{t^a}),  -, -) \longrightarrow (e, \sigma, (\vec{x}::x, \vec{t^x}::t, \vec{a}, \vec{t^a}), -, -)}
+    	$ \kspace \\
+    	
+    	$
+    	\inferrule[Bind-Name]
+    	{ }
+    	{(\texttt{new}\;x = t\;\texttt{in}\;e, \sigma, (\vec{x}, \vec{t^x}, \vec{a}, \vec{t^a}),  -, -) \longrightarrow (e, \sigma, (\vec{x}, \vec{t^x}, \vec{a}::x, \vec{t^a}::t),  -, -)}
+    	$     	\kspace		\\
+
+    	$
+    	\inferrule[Bind-OK]  % v_i不会被替换，但可能用于替换
+    	{ k_x = |\vec{x}|\quad k_a = |\vec{a}|\quad k_x > 0 \vee k_a > 0\\
+        \quad \forall i \in \{1, \dots, k_x\}\; {\iv}_i = new\_loc_v() \\
+        \quad \forall j \in \{1, \dots, k_a\}\; {\ia}_j = new\_loc_a() \\
+    	\quad \forall i \in \{1,\dots, k_x\}\;t_i^{x\prime} = t_i^x[{\iv}_1/x_1]\dots[{\iv}_{k_x}/x_i][{\ia}_1/a_1]\dots[{\ia}_{k_a}/a_{k_a}] \\
+    	\quad \forall j \in \{1,\dots, k_a\}\;t_j^{a\prime} = t_j^a[{\iv}_1/x_1]\dots[{\iv}_{k_x}/x_{k_x}][{\ia}_1/a_1]\dots[{\ia}_{k_a}/a_{k_a}] \\
+    	\quad t' = t[{\iv}_1/x_i]\dots[{\iv}_{k_x}/x_i][{\ia}_1/a_1]\dots[{\ia}_{k_a}/a_{k_a}]\\
+    	\quad s' = s\{{\iv}_1 \rightsquigarrow {t_1^{x\prime}},\dots, {\iv}_{k_x} \rightsquigarrow {{t_{k_x}^{x\prime}}}\} \\
+    	\quad h' = h\{{\ia}_1\rightsquigarrow {t_1^{a\prime}}, \dots, {\ia}_{k_a}\rightsquigarrow {{{t}_{k_a}^{a\prime}}}\} \\
+    	}
+    	{(t, (s, h), (\vec{x}, \vec{t^x}, \vec{a}, \vec{t^a}), -, -) \longrightarrow (t', (s', h'), -, -, -)}
+    	$ \kspace \\   
+            
+        $
+    	\inferrule[Eval-Thunk-Apply] % evaluate a var bind with a term
+    	{n = \abs{\vec{x}}\quad \abs{\vec{x}} = \abs{\vec{r}}\quad \forall\;i\in\{1,\dots,n\}\quad{\iv}_i = new\_loc_v()}
+    	{ (\vec{x}(\vec{r}).e, (s, h), -, -, -) \longrightarrow\\ (e[{\iv}_1/x_1]\dots[{\iv}_n/x_n], (s\{{\iv}_1\rightsquigarrow r_1,\dots,{\iv}_n\rightsquigarrow r_n\}, h), -, -, -)}
+    	$ \\
+	\end{tabular}
+    \caption{Operational Semantics for Spartan}
+    \label{tb:formal-semantics-bind}
+\end{table}

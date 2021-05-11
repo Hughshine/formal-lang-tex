@@ -1,0 +1,34 @@
+\section{syntax}
+
+We can see the grammar of X language in table \ref{syntax}. It's written in BNF\cite{bnf}.
+
+\begin{longtable}{rcl}
+    \hline
+    $ (\!\textit{Integer})\ n $ & $ \in $ & $ Int $\\
+    $ (\!\textit{Bool})\ b $ & $ \in $ & $ \{\texttt{true}, \texttt{false}\} $\\
+
+    $ passive\_operation $ & $::=$ & $ \texttt{int}/n(-;-) $\\
+     && $ \texttt{bool}/b(-;-) $\\
+     && $ \texttt{func}/n(v_1\dots v_n.e)$\\ 
+     $ active\_operation $ & $::=$ & $int\_arith$\\
+     && $ bool\_arith $\\ \hline
+     \caption{Syntax}
+     \label{syntax}
+\end{longtable}
+
+Describe the scope of variable binding informally...
+
+And we can write a sample program like \ref{code:sample}.
+
+\begin{listing}[H]
+    \begin{minted}[frame=lines,baselinestretch=1,fontsize=\footnotesize]{text}
+        &&(
+            >(2, 1);
+            _.||(!=(0, 1), false)
+        )
+    \end{minted}
+	\caption{Sample Code}
+    \label{code:sample}
+\end{listing}
+
+If you like, you can have 中文.

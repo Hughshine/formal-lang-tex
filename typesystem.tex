@@ -1,0 +1,36 @@
+\section{type system}
+
+We have a sample type system, in table \ref{tb:type-system}.
+
+\begin{table}[h]
+    \centering
+    \[
+    \arraycolsep=1em
+    \def\arraystretch{2.5}
+    \begin{array}{c}
+    % \hline
+            \begin{array}{ccc}
+            \infer
+                {\vdash \textit{Int} : int}
+                {\;}
+
+            &
+            \infer
+                {\vdash \textit{Real} : real}
+                {\;}
+            & 
+            \infer 
+                {\vdash \texttt{(}e\texttt{)}:\tau}
+                {\vdash e:\tau}
+        \end{array}
+        \\
+        \begin{array}{c}
+            \infer
+                {\vdash e_1\;op\;e_2 : \tau}
+                {\vdash e_1:\tau\quad \vdash e_2:\tau}
+        \end{array}
+    \end{array}
+    \]
+    \caption{Sample Type System}
+    \label{tb:type-system}
+\end{table}

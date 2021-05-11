@@ -1,0 +1,191 @@
+% * Syntax(scope) 
+% * Simple type system(typing rule, scope rule)
+% * Operational Semantics
+%     * State 
+%         Notation 
+%     * Structural operational semantics
+%         * use substitution to close a term
+\documentclass[12pt,openright,bibliography=totoc]{article}
+\usepackage[UTF8]{ctex}
+% \usepackage{ctex}
+
+\def\tablename{Table}
+\def\figurename{Figure}
+
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage[bookmarksnumbered]{hyperref}
+\else
+  \usepackage[unicode,bookmarksnumbered]{hyperref}
+\fi
+
+\usepackage{amssymb}
+\usepackage[nottoc,numbib]{tocbibind}
+%   根据需要选择 biblatex 宏包选项.
+%\usepackage[maxnames=3,minnames=3,sorting=none,style=xxx]{biblatex}
+\usepackage[maxnames=3,minnames=3,sorting=none]{biblatex}
+% \usepackage{cite}
+\hypersetup{colorlinks=true,
+            pdfborder=0 0 1,
+            citecolor=black,
+            linkcolor=black}
+%\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.13}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{auto-pst-pdf}
+\usepackage[pdf]{graphviz}
+\usepackage[section]{placeins}
+
+% \usepackage{subfigure}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{proof}
+\usepackage{mathpartir}
+\usepackage{stmaryrd}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{setspace}
+\usepackage{color,xcolor}
+% \usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\let\stmaryrdLightning\lightning
+\usepackage{dblfloatfix}
+\usepackage{lastpage}
+
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{cases}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{fancyvrb}
+\usepackage{xparse}
+\usepackage{alltt}
+\usepackage{longtable}
+\usepackage[newfloat]{minted}
+\usepackage{fancyhdr}
+
+% \usepackage{multicol,longtable,caption,tabu}
+% \usepackage{multicap}
+% \usepackage{ksafe-lin-proof}
+\usepackage{mathtools}
+\usepackage{tabularx}  
+\usepackage{tikz}
+\usepackage{makecell}
+\usepackage{fancyvrb}
+\usepackage{enumitem}
+
+\usetikzlibrary{trees}
+\usetikzlibrary{graphs}
+\usetikzlibrary{arrows}
+
+\tikzset{
+      treenode/.style = {align=center, inner sep=0pt, text centered,
+        font=\sffamily},
+      arn_n/.style = {treenode, circle,black, draw=black, text width=1.3em},% 
+    level distance = 1cm,
+    level 1/.style={sibling distance=2cm},
+    level 2/.style={sibling distance=1cm},
+    level 3/.style={sibling distance=1cm}
+}
+
+% 设置页边距，set margins
+\usepackage[left = 15mm, right = 15mm, top = 20mm, bottom= 20mm]{geometry}
+\geometry{a4paper,left=2.3cm,right=2.3cm,top=2.7cm,bottom=2.7cm}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+
+\definecolor{corange}{HTML}{FF9666}
+\definecolor{lblue}{HTML}{97FFFF}
+\definecolor{cblue}{HTML}{AB82FF}
+\definecolor{cred}{HTML}{FF99A1}
+\definecolor{cgreen}{HTML}{7ACCBE}
+\definecolor{red1}{RGB}{254,67,101}
+\definecolor{red2}{RGB}{252,157,154}
+\definecolor{red3}{RGB}{249,205,173}
+\definecolor{grey1}{RGB}{200,200,169}
+\definecolor{grey2}{RGB}{131,175,155}
+\definecolor{color1}{HTML}{0099CC}
+\definecolor{color2}{HTML}{F9B46F}
+\definecolor{cblue1}{HTML}{0074D9}
+\definecolor{lblue1}{HTML}{99CCFF}
+\definecolor{corange1}{HTML}{FFDDCE}
+\definecolor{corange2}{HTML}{FF9900}
+\definecolor{corange3}{HTML}{FF9966}
+\definecolor{corange4}{HTML}{FF6600}
+\definecolor{cred2}{HTML}{FF6666}
+\usetikzlibrary{patterns}
+\addbibresource{main.bib}
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+\includeonly{
+syntax, 
+typesystem,
+state,
+semantics,
+assertionlang,
+references
+}
+
+\pagestyle{fancy}
+\lhead{Techinical Setting for \textbf{X} Language}
+\rhead{\rightmark}
+\cfoot{\thepage\ of \pageref{LastPage}}%当前页 of 总页数
+\renewcommand{\headrulewidth}{0.4pt}%改为0pt即可去掉页眉下面的横线
+\renewcommand{\footrulewidth}{0.4pt}%改为0pt即可去掉页脚上面的横线
+
+% \newtheorem{Theorem}{\hskip 2em 定理}[section]
+% \newtheorem{Lemma}[Theorem]{\hskip 2em 引理}
+% \newtheorem{Corollary}[Theorem]{\hskip 2em 推论}
+% \newtheorem{Proposition}[Theorem]{\hskip 2em 命题}
+% \newtheorem{Definition}[Theorem]{\hskip 2em 定义}
+% \newtheorem{Example}[Theorem]{\hskip 2em 例}
+% \newcommand{\upcite}[1]{\textsuperscript{\textsuperscript{\cite{#1}}}}
+% \renewcommand{\algorithmicrequire}{\textbf{输入：}}
+% \renewcommand{\algorithmicensure}{\textbf{输出：}}
+% \algnewcommand{\LeftComment}[1]{\Statex \(\triangleright\) #1}
+% \floatname{algorithm}{算法}
+
+\newcommand{\abs}[1]{\lvert#1\rvert}
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\newcommand{\iv}{\texttt{i}_v}
+\newcommand{\ia}{\texttt{i}_a}
+\newcommand{\iL}{\texttt{i}_L}
+\newcommand{\kspace}{\vspace{0.5cm}}
+\algnewcommand\algorithmicmatch{\textbf{match}}
+\algnewcommand\algorithmicwith{\textbf{with}}
+\algnewcommand\algorithmiccase{\textbf{case}}
+\algnewcommand\algorithmicassert{\texttt{assert}}
+\algnewcommand\Assert[1]{\State \algorithmicassert(#1)}%
+% New "environments"
+\algdef{SE}[MATCH]{Match}{EndMatch}[1]{\algorithmicmatch\ #1\ \algorithmicwith}{\algorithmicend\ \algorithmicmatch}%
+\algdef{SE}[CASE]{Case}{EndCase}[1]{\algorithmiccase\ #1}{\algorithmicend\ \algorithmiccase}%
+\algtext*{EndSwitch}%
+\algtext*{EndCase}%
+
+\title{Techinical Setting for \textbf{X} Language}
+\author{Apprentice}
+\date{Jan. 2000}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\newpage
+
+\include{syntax}
+\include{typesystem}
+\include{state}
+% \include{assertionlang}
+\include{semantics}
+\include{references}
+
+\end{document}
